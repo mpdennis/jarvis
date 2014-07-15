@@ -54,15 +54,19 @@ GPIO.setup(SPIMISO, GPIO.IN)
 GPIO.setup(SPICLK, GPIO.OUT)
 GPIO.setup(SPICS, GPIO.OUT)
 
+channel_no = 0
 Read_input = 1
+time_passed = 0
+total_voltage = 0
+voltage_list = []
 
 while Read_input:
 
 	# Add total time that program is outputting data
-	time_passed = time_passed + .5
+	time_passed = time_passed + .25
 
         # read the analog pin
-        voltage = readadc(potentiometer_adc, SPICLK, SPIMOSI, SPIMISO, SPICS)
+        voltage = readadc(channel_no, SPICLK, SPIMOSI, SPIMISO, SPICS)
 
 	#print voltage and voltage number
         if DEBUG:
@@ -70,15 +74,19 @@ while Read_input:
                 print "voltage:", set_voltage, " voltage no:", voltage
 
 	# start summing voltage after 2 seconds has passed
-	if (time_passed >= 2)
+	if time_passed > 2:
 		total_voltage = total_voltage + voltage
-
+		voltage_list.append(voltage)
+		
 	# print average voltage and voltage number and end loop
-	if (time_passed >= 12)
-		avg_volt_no = total_voltage / 20
-		avg_volt = (avg_volt_no * 3.323) / 1023
-		print "\n", "Avg voltage:", avg_volt, " Avg voltage no:", avg_volt_no
+	if time_passed >= 12:
+		avg_volt_no = float(total_voltage) / float(40)
+#		avg_volt = (avg_volt_no * 3.323) / 1023
+		max_volt = max(voltage_list)
+		min_volt = min(voltage_list)
+#		print "\n", "Avg voltage:", avg_volt,
+		print "\n", "Avg voltage no:", avg_volt_no, " Min no:", min_volt, " Max no:", max_volt, "\n" 
 		Read_input = 0
 
 	#Wait time between voltage readings
-	time.sleep(0.5)
+	time.sleep(0.25)
