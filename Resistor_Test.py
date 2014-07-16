@@ -85,8 +85,11 @@ while Read_input:
 		max_volt = max(voltage_list)
 		min_volt = min(voltage_list)
 #		print "\n", "Avg voltage:", avg_volt,
-		print "\n", "Avg voltage no:", avg_volt_no, " Min no:", min_volt, " Max no:", max_volt, "\n" 
+		print "\n", "Min no:", min_volt, " Max no:", max_volt, " Avg voltage no:", avg_volt_no, "\n" 
 		Read_input = 0
 
 	#Wait time between voltage readings
 	time.sleep(0.25)
+
+GPIO.cleanup()
+
