@@ -63,7 +63,6 @@ print AC1, AC2, AC3, AC4, AC5, AC6, B1, B2, MB, MC, MD
 while True:
 	#Read data for temp and pressure
 	temp_data = Read(bus, addr, control_reg, temp_value)
-	print temp_data
 	pressure_data = Read(bus, addr, control_reg, press_value)
 
 	#Calculate true temp
@@ -76,25 +75,24 @@ while True:
 	print T,"degrees Celsius"
 
 	#Calculate true pressure
-	B6 = B5 - 4000
-	X1 = (B2*(B6*B6/(2**12)))/(2**11)
-	X2 = AC2 * B6/(2**11)
-	X3 = X1 + X2
-	B3 = (((AC1*4+X3)*1)+2)/4
-	X1 = AC3 * B6/(2**11)
-	X2 = (B1 * (B6*B6/(2**12)))/(2**16)
-	X3 = ((X1+X2)+2)/4
-	B4 = AC4*(X3 +32768)/(2**15)
-	B7 = (pressure_data - B3)*(50000)
-	
+	B6 = float(B5) - 4000
+	X1 = (float(B2)*(float(B6)*float(B6)/(2**12)))/(2**11)
+	X2 = float(AC2) * float(B6)/(2**11)
+	X3 = float(X1) + float(X2)
+	B3 = (((float(AC1)*4+float(X3))*1)+2)/4
+	X1 = float(AC3) * float(B6)/(2**11)
+	X2 = (float(B1) * (float(B6)*float(B6)/(2**12)))/(2**16)
+	X3 = ((float(X1)+float(X2))+2)/4
+	B4 = float(AC4)*(float(X3) +32768)/(2**15)
+	B7 = (float(pressure_data) - float(B3))*(50000)
 	if B7 < 0x80000000:
-		p = (B7 * 2)/B4
+		p = (float(B7) * 2)/float(B4)
 	else:
-		p = (B7/B4)*2
-	X1 = (p/(2**8))*(p/(2**8))
-	X1 = (X1 * 3038) / (2**16)
-	X2 = (-7357*p)/(2**16)
-	p = p + (X1+X2+3791)/(2**4)
-
+		p = (float(B7)/float(B4))*2
+	X1 = (float(p)/(2**8))*(float(p)/(2**8))
+	X1 = (float(X1) * 3038) / (2**16)
+	X2 = (-7357*float(p))/(2**16)
+	p = float(p) + (float(X1)+float(X2)+3791)/(2**4)
+	p = int(p) - 21000
 	print p,"Pa"
 	time.sleep(.5)
