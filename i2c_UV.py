@@ -13,6 +13,6 @@ adc = ADS1x15(ic=ADS1115)
 
 while True:
 	volts = adc.readADCSingleEnded(0, gain, sps) / 1000
-	print("%.6f" % volts), "Volts"
+	UV = volts * 12.49 -12.49
+	print ("%.4f" % UV), "mW/m^2"
 	time.sleep(.1)
-

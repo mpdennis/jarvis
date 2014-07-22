@@ -20,7 +20,7 @@ while True:
 	low0_data = bus.read_byte_data(addr,low0)
 	high0_data = bus.read_byte_data(addr,high0)
 	CH0 = 256 * high0_data + low0_data
-	if CH0 != 0
+	if CH0 != 0:
 		low1_data = bus.read_byte_data(addr, low1)
 		high1_data = bus.read_byte_data(addr, high1)
 		CH1 = 256 * high1_data + low1_data
