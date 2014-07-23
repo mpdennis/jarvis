@@ -13,9 +13,8 @@ adc = ADS1x15(ic=ADS1115)
 
 while True:
 	volts = adc.readADCSingleEnded(0, gain, sps) / 1000
-	volts = abs(volts)
-	log = 20*math.log10(volts/.005012)
 #	print("%.6f" % volts), "Volts"
-	db = log-46+94 
-	print("%.2f" % db), "Decibels"
-	time.sleep(.05)
+	temp = volts/.03
+	print ("%.1f" % temp), "degrees Celsius"
+	time.sleep(.1)
+
