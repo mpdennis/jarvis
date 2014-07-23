@@ -1,0 +1,46 @@
+import time
+import botbook_gpio as gpio 
+
+
+def readDistanceCm():
+        sigPin=22
+        
+        v=(331.5+0.6*20) #cm
+        
+        #v=(13397.24+0.6*20) #in
+        
+        gpio.interruptMode(sigPin, "both")      
+
+        gpio.mode(sigPin, "out")        
+        gpio.write(sigPin, gpio.LOW)    
+        time.sleep(0.5) # s
+
+        gpio.write(sigPin, gpio.HIGH)   
+        time.sleep(1/1000.0/1000.0)     
+        gpio.mode(sigPin, "in") # <8>
+
+        #Read high pulse width
+        t = gpio.pulseInHigh(sigPin) # s        
+        d = t*v
+        d = d/2 # <10>
+        return d*100       # cm
+
+def main():
+        file_object = open('/home/pi/ultrasonic list/data','a') #file path can't be to long, text file to write the data to will be created if it doen't exist
+        #r = read w = write a= append r+ = read and write
+        x = 0
+        while x < 25:
+                d = readDistanceCm()    
+                print ("Distance is %.2f cm" % d) 
+                
+                file_object.write("Distance is %.2f cm" % d) #writes data to the text file with a floating 2 decimal point
+                file_object.write(' ') #can only write one string at  time space to seperate time stamp
+                file_object.write(time.strftime('%a,%H:%M:%S %Z'))#writes the date the data was taken in the format day,hour:minute:second %a=day,%H=hour,%M-minute,%S=second
+                file_object.write('\n') #adds line to seperate data
+                x = x +1
+                time.sleep(0.5)
+        file_object.close() #closes file to prevent corruption
+       
+
+if __name__ == "__main__":
+        main()
