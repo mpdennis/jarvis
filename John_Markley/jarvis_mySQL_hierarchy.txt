@@ -2,22 +2,22 @@ My database layout
 
 mySQL Server
      |---- jarvis
-      		   |---- sensorList
-      		   |		 |---- sensorIndex
-  		   |		 |---- sensorName
-       		   |		 |---- sensorType
-  		   |		 |---- sensorIC
-      		   |		 |---- sensorUpdatedAt
-      		   |		 |---- sensorIsDigital
-      		   |
-             	   |
-  	    	   |---- sensorLogs
-  		       		 |---- logIndex
-  		    	    	 |---- sensorIndex
-      		    		 |---- sensorValue
-	      	    		 |---- sensorUoM
-   		       		 |---- sensorRaw
-		    	      	 |---- sensorDateTime
+      	      |---- sensorList
+      	      |		 |---- sensorIndex
+  	      |		 |---- sensorName
+       	      |		 |---- sensorType
+  	      |		 |---- sensorIC
+      	      |		 |---- sensorUpdatedAt
+      	      |		 |---- sensorIsDigital
+      	      |
+              |
+  	      |---- sensorLogs
+  	       		 |---- logIndex
+  	    	    	 |---- sensorIndex
+      	    		 |---- sensorValue
+	      		 |---- sensorUoM
+   	      		 |---- sensorRaw
+   	      		 |---- sensorDateTime
 
 
 sensorIndex is the unique identifier for each sensor. i.e. 1, 2, 67
