@@ -4,19 +4,19 @@ mySQL Server
      |---- jarvis
       		   |---- sensorList
       		   |		 |---- sensorIndex
-  		       |		 |---- sensorName
+  		   |		 |---- sensorName
        		   |		 |---- sensorType
-  		       |		 |---- sensorIC
+  		   |		 |---- sensorIC
       		   |		 |---- sensorUpdatedAt
       		   |		 |---- sensorIsDigital
       		   |
-             |
+             	   |
   	    	   |---- sensorLogs
-  		        		 |---- logIndex
+  		       		 |---- logIndex
   		    	    	 |---- sensorIndex
       		    		 |---- sensorValue
 	      	    		 |---- sensorUoM
-   		         		 |---- sensorRaw
+   		       		 |---- sensorRaw
 		    	      	 |---- sensorDateTime
 
 
