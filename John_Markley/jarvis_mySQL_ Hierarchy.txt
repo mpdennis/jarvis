@@ -1,0 +1,37 @@
+My database layout
+
+mySQL Server
+     |---- jarvis
+      		   |---- sensorList
+      		   |		 |---- sensorIndex
+  		       |		 |---- sensorName
+       		   |		 |---- sensorType
+  		       |		 |---- sensorIC
+      		   |		 |---- sensorUpdatedAt
+      		   |		 |---- sensorIsDigital
+      		   |
+             |
+  	    	   |---- sensorLogs
+  		        		 |---- logIndex
+  		    	    	 |---- sensorIndex
+      		    		 |---- sensorValue
+	      	    		 |---- sensorUoM
+   		         		 |---- sensorRaw
+		    	      	 |---- sensorDateTime
+
+
+sensorIndex is the unique identifier for each sensor. i.e. 1, 2, 67
+sensorName is the readable name of the sensor. i.e. living room temperature, basement light sensor, ect.
+sensorType is the type of measurement, i.e. temperature, light, sound, vibration, ect.
+sensorIC is the component. i.e. LM36, photoresistor, ect.
+sensorUpdatedAt is the last time the sensor was recorded to the logs. 
+sensorIsDigital is whether the interface is digital or analog. i.e. true, false
+
+logIndex is the unique identifier for each log.
+sensorName is the readable name of the sensor. i.e. living room temperature, basement light sensor, ect.
+sensorValue is the calculated sensor value after adjusted for the sensor. i.e. 34, 89, 60.4
+sensorUoM is the unit of measurement. i.e. Celsius, Fahrenheit, percentage, Volts, Lumens, Decibels, ect.
+sensorRaw this the measured value from the interface from the interface. i.e. 0.003522, 1.023445, 3.433202, ect.
+sensorDateTime is the time the sensor was recorded to the logs. i.e. 
+					now = datetime.datetime.now()
+					sensorDateTime = now.strftime("%Y/%m/%d %H:%M:%S.%f")
