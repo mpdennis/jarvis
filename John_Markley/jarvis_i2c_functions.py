@@ -19,7 +19,7 @@ adc = ADS1x15(ic=ADS1115)
 file = open("tempoutput.txt", "w")
 file.write("Type,Value,Unit,Raw\n")
 
-loopnumber=200 # number of times to loop.
+loopnumber=10 # number of times to loop.
 # loop data retrieval
 
 x=0 # Initialize loop
@@ -40,7 +40,7 @@ while True:
 # 	# print the temperture out to the command line in degrees Fahrenheit
 #	print ("%.1f" % tempf), "degrees Fahrenheit"
 #	# print the temperture out to the command line in degrees Celsius
-#	print ("%.1f" % tempc), "degrees Celsius"
+	print ("%.1f" % tempc), "degrees Celsius"
 	
 	# Increment loop by 1
 	x += 1  
