@@ -27,7 +27,7 @@ while True:
 	# Retrieve the voltage from the ADS1115 input 0
 	volts = adc.readADCSingleEnded(0, gain, sps) / 1000
 	# convert the voltage to degrees
-	tempc = ADS1115_LM36(volts, "C")
+#	tempc = ADS1115_LM36(volts, "C")
 	# pause .1 seconds
 	time.sleep(.1)
 	# write the value to a file
@@ -36,11 +36,11 @@ while True:
 ##      Test the values      ##
 ###############################
 #	# print the voltage out to the command line
-#	print("%.6f" % volts), "Volts"
+	print("%.6f" % volts), "Volts"
 # 	# print the temperture out to the command line in degrees Fahrenheit
 #	print ("%.1f" % tempf), "degrees Fahrenheit"
 #	# print the temperture out to the command line in degrees Celsius
-	print ("%.1f" % tempc), "degrees Celsius"
+#	print ("%.1f" % tempc), "degrees Celsius"
 	
 	# Increment loop by 1
 	x += 1  
