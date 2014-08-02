@@ -31,7 +31,7 @@ while True:
 	# pause .1 seconds
 	time.sleep(.1)
 	# write the value to a file
-	file.write("temp,"+("%.1f" % tempc)+",Celsius,"+("%.6f" % volts)+"\n")
+#	file.write("temp,"+("%.1f" % tempc)+",Celsius,"+("%.6f" % volts)+"\n")
 ###############################
 ##      Test the values      ##
 ###############################
