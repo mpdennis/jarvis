@@ -5,9 +5,11 @@ import smbus
 import math
 import sys
 import os.path
+import jarvis_conversion
+
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), os.path.pardir)))
 from Adafruit_ADS1x15 import ADS1x15
-import jarvis_coversion
+
 ADS1115 = 0x01
 gain = 6144
 sps = 860
