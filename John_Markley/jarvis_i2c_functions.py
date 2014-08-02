@@ -56,14 +56,12 @@ def ADS1115_LM36(volts, unit): # return temperature conversion from LM36
      if unit == "C":
      	# return the degrees in celsius
      	return tempc
-     	break 
      
      if unit == "F":
      	# convert celsius to degrees fahrenheit
      	tempf = (tempc*9/5)+32
      	# return the degrees in fahrenheit
      	return tempf
-     	break
      
      return "Failed to convert"
 
