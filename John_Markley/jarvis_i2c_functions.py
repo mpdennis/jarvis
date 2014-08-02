@@ -7,7 +7,7 @@ import sys
 import os.path
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), os.path.pardir)))
 from Adafruit_ADS1x15 import ADS1x15
-
+import jarvis_coversion
 ADS1115 = 0x01
 gain = 6144
 sps = 860
@@ -47,21 +47,3 @@ while True:
 		break 
 # close the file
 file.close()
-
-
-def ADS1115_LM36(volts, unit): # return temperature conversion from LM36
-     # convert the voltage to degrees celsius
-     tempc = volts/.03 
-     
-     if unit == "C":
-     	# return the degrees in celsius
-     	return tempc
-     
-     if unit == "F":
-     	# convert celsius to degrees fahrenheit
-     	tempf = (tempc*9/5)+32
-     	# return the degrees in fahrenheit
-     	return tempf
-     
-     return "Failed to convert"
-
