@@ -13,3 +13,6 @@ def ADS1115_LM36(volts, unit): # return temperature conversion from LM36
      	return tempf
      
      return "Failed to convert"
+def ADS1115_UV(volts)
+     UV = volts * 12.49 -12.49
+	return ("%.4f" % UV)
