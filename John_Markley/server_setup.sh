@@ -4,8 +4,8 @@ sudo dpkg-reconfigure keyboard-configuration
 
 ### Enable i2c bus  ###
 # commands are based on instructions at https://learn.adafruit.com/adafruits-raspberry-pi-lesson-4-gpio-setup/configuring-i2c
-sed -i '/blacklist i2c-bcm2708/c\\#blacklist i2c-bcm2708' /etc/modprobe.d/raspi-blacklist.conf
-printf "i2c-bcm2708\ni2c-dev\n" >> /etc/modules
+sed -i '/blacklist i2c-bcm2708/c\\#blacklist i2c-bcm2708' /etc/modprobe.d/raspi-blacklist.conf # comment out the blacklist for i2c
+printf "i2c-bcm2708\ni2c-dev\n" >> /etc/modules # load the modules for i2c
 
 
 
@@ -18,7 +18,6 @@ printf "i2c-bcm2708\ni2c-dev\n" >> /etc/modules
 sudo apt-get install i2c-tools python-smbus # commands for command line and commands for python
 
 sudo adduser pi i2c # give pi access to the i2c bus
-python-scripts/i2c.test.py python-scripts/i2c.write-attiny.py 
 
 
 ### Install bonjour  ###
@@ -59,3 +58,6 @@ git clone git://github.com/mpdennis/jarvis
 # commands were found at https://github.com/Thebanjodude/PiGauge/blob/master/README.md
 sudo adduser www-data i2c
 sudo /etc/init.d/apache2 restart
+
+echo "please restart your pi"
+echo "use 'sudo halt' and disconnect the power after 30 seconds then reconnect"
