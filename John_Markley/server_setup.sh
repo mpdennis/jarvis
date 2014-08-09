@@ -3,11 +3,9 @@
 sudo dpkg-reconfigure keyboard-configuration
 
 ### Enable i2c bus  ###
-cd /etc/modprobe.d
-echo "comment out the 'i2c-bcm2708' to make it '#i2c-bcm2708' "
-sudo nano raspi-blacklist.conf #
-echo "i2c-bcm2708" >> /etc/modules
-echo "i2c-dev" >> /etc/modules
+# commands are based on instructions at https://learn.adafruit.com/adafruits-raspberry-pi-lesson-4-gpio-setup/configuring-i2c
+sed -i '/blacklist i2c-bcm2708/c\\#blacklist i2c-bcm2708' /etc/modprobe.d/raspi-blacklist.conf
+printf "i2c-bcm2708\ni2c-dev\n" >> /etc/modules
 
 
 
@@ -17,8 +15,8 @@ echo "i2c-dev" >> /etc/modules
 
 
 ###  Download the i2c tools  ###
-sudo apt-get install i2c-tools # commands for command line
-sudo apt-get install python-smbus # commands for python
+sudo apt-get install i2c-tools python-smbus # commands for command line and commands for python
+
 sudo adduser pi i2c # give pi access to the i2c bus
 python-scripts/i2c.test.py python-scripts/i2c.write-attiny.py 
 
