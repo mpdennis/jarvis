@@ -1,7 +1,7 @@
 #!/bin/bash
 ### Configure the keyboard  ###
 sudo dpkg-reconfigure keyboard-configuration
-
+ADDS
 ### Enable i2c bus  ###
 # commands are based on instructions at https://learn.adafruit.com/adafruits-raspberry-pi-lesson-4-gpio-setup/configuring-i2c
 sed -i '/blacklist i2c-bcm2708/c\\#blacklist i2c-bcm2708' /etc/modprobe.d/raspi-blacklist.conf # comment out the blacklist for i2c
