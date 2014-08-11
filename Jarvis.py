@@ -35,7 +35,7 @@ def ID(ID,output):
                 return 4
         elif(0.582 < ID <= 0.737):
 	# ID = 5, Magnetic Door Sensor
-		if volts6 <= 0:
+		if output <= 0:
             	    	print "Magnetic Field Detected"
         	else:
                 	print "No Magentic Field Detected"
@@ -105,7 +105,8 @@ def BMP180_Convert(temp_data, pressure_data):
         T = (float(B5)+8)/(2**4)
         T=int(T)
         T=float(T)/10
-
+	print T, "degrees C"
+	
         #Calculate true pressure
         B6 = float(B5) - 4000
         X1 = (float(B2)*(float(B6)*float(B6)/(2**12)))/(2**11)
@@ -126,7 +127,8 @@ def BMP180_Convert(temp_data, pressure_data):
         X2 = (-7357*float(p))/(2**16)
         p = float(p) + (float(X1)+float(X2)+3791)/(2**4)
         p = int(p) - 21000
-
+	print p, "Pa"
+	
 	return T,p
 
 #Reads in values from data registers from TSL2561
@@ -157,7 +159,7 @@ def TSL2561(addr):
                         lux = 0.00338 * CH0 - 0.00260 * CH1
                 elif(data > 1.30):
                         lux = 0
-
+	print lux, "lux"
 	return lux
 
 #Initializes all 8 data pins on sensor board
@@ -195,55 +197,68 @@ startaddr = 0x80
 startval = 0x03
 
 #Starts data collection for TSL2561
-bus.write_byte_data(addr, startaddr, startval)
+try:
+	bus.write_byte_data(TSL2561_addr, startaddr, startval)
+except:
+	pass
 
 while True:
 	#Starts data collection for BMP180 and reads data for temperature and air pressure
-        temp_data = BMP180_Read(bus, bar_addr, control_reg, temp_value)
-        pressure_data = BMP180_Read(bus, BMP180_addr, control_reg, press_value)
+        try:
+		temp_data = BMP180_Read(bus, BMP180_addr, control_reg, temp_value)
+        	pressure_data = BMP180_Read(bus, BMP180_addr, control_reg, press_value)
 
-	#Get converted temperature and pressure 
-	BMP180_Temp,BMP180_Pressure = BMP180_Convert(temp_data,pressure_data)
-       
+		#Get converted temperature and pressure 
+		BMP180_Temp,BMP180_Pressure = BMP180_Convert(temp_data,pressure_data)
+	except:      
+ 		pass
+	
 	#Get converted lux
-	TSL2561_lux = TSL2561(TSL2561_addr)
+	try:
+		TSL2561_lux = TSL2561(TSL2561_addr)
+	except:
+		pass
 
 	#Collecting and converting data from analog pinset 1
-	0x48_0 = analog0.readADCSingleEnded(0, gain, sps) / 1000
-	0x48_1 = ID0.readADCSingleEnded(1, gain, sps) / 1000
-	ID(0x48_1,0x48_0)
+	x48_0 = analog0.readADCSingleEnded(0, gain, sps) / 1000
+	x48_1 = ID0.readADCSingleEnded(1, gain, sps) / 1000
+	ID(x48_1,x48_0)
 
 	#Collecting and converting data from analog pinset 2
-	0x48_3 = analog1.readADCSingleEnded(3, gain, sps) / 1000
-        0x48_2 = ID1.readADCSingleEnded(2, gain, sps) / 1000
-        ID(0x48_2,0x48_3)
+	x48_3 = analog1.readADCSingleEnded(3, gain, sps) / 1000
+        x48_2 = ID1.readADCSingleEnded(2, gain, sps) / 1000
+        ID(x48_2,x48_3)
 
 	#Collecting and converting data from analog pinset 3
-	0x49_0 = analog2.readADCSingleEnded(0, gain, sps) / 1000
-        0x49_1 = ID2.readADCSingleEnded(1, gain, sps) / 1000
-        ID(0x49_1,0x49_0)
+#	x49_0 = analog2.readADCSingleEnded(0, gain, sps) / 1000
+ #       x49_1 = ID2.readADCSingleEnded(1, gain, sps) / 1000
+  #      ID(x49_1,x49_0)
 
 	#Collecting and converting data from analog pinset 4
-	0x49_2 = analog3.readADCSingleEnded(2, gain, sps) / 1000
-        0x49_3 = ID3.readADCSingleEnded(3, gain, sps) / 1000
-        ID(0x49_3,0x49_2)
+#	x49_2 = analog3.readADCSingleEnded(2, gain, sps) / 1000
+ #       x49_3 = ID3.readADCSingleEnded(3, gain, sps) / 1000
+  #      ID(x49_3,x49_2)
 
 	#Collecting and converting data from analog pinset 5
-	0x4a_0 = analog4.readADCSingleEnded(0, gain, sps) / 1000
-        0x4a_1 = ID4.readADCSingleEnded(1, gain, sps) / 1000
-        ID(0x4a_1,0x4a_0)
+	x4a_0 = analog4.readADCSingleEnded(0, gain, sps) / 1000
+        x4a_1 = ID4.readADCSingleEnded(1, gain, sps) / 1000
+        ID(x4a_1,x4a_0)
 
 	#Collecting and converting data from analog pinset 6
-	0x4a_3 = analog5.readADCSingleEnded(3, gain, sps) / 1000
-        0x4a_2 = ID5.readADCSingleEnded(2, gain, sps) / 1000
-        ID(0x4a_2,0x4a_3)
+	x4a_3 = analog5.readADCSingleEnded(3, gain, sps) / 1000
+        x4a_2 = ID5.readADCSingleEnded(2, gain, sps) / 1000
+        ID(x4a_2,x4a_3)
 
 	#Collecting and converting data from analog pinset 7
-	0x4b_1 = analog6.readADCSingleEnded(1, gain, sps) / 1000
-        0x4b_0 = ID6.readADCSingleEnded(0, gain, sps) / 1000
-        ID(0x4b_0,0x4b_1)
+	x4b_1 = analog6.readADCSingleEnded(1, gain, sps) / 1000
+        x4b_0 = ID6.readADCSingleEnded(0, gain, sps) / 1000
+        ID(x4b_0,x4b_1)
 
 	#Collecting and converting data from analog pinset 8
-	0x4b_2 = analog7.readADCSingleEnded(2, gain, sps) / 1000
-        0x4b_3 = ID7.readADCSingleEnded(3, gain, sps) / 1000
-        ID(0x4b_3,0x4b_2)
+	x4b_2 = analog7.readADCSingleEnded(2, gain, sps) / 1000
+        x4b_3 = ID7.readADCSingleEnded(3, gain, sps) / 1000
+        ID(x4b_3,x4b_2)
+
+	print "--------------------------------------------"
+
+	time.sleep(.5)
