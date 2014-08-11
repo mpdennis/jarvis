@@ -196,13 +196,13 @@ TSL2561_addr = 0x39
 startaddr = 0x80
 startval = 0x03
 
-#Starts data collection for TSL2561
-try:
-	bus.write_byte_data(TSL2561_addr, startaddr, startval)
-except:
-	pass
-
 while True:
+	#Starts data collection for TSL2561
+	try:
+		bus.write_byte_data(TSL2561_addr, startaddr, startval)
+	except:
+		pass
+
 	#Starts data collection for BMP180 and reads data for temperature and air pressure
         try:
 		temp_data = BMP180_Read(bus, BMP180_addr, control_reg, temp_value)
